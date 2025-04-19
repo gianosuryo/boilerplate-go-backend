@@ -1,0 +1,3811 @@
+definitions:
+  controller.RequestLogin:
+    properties:
+      email:
+        example: admin@bumame.com
+        type: string
+      password:
+        example: "123456"
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  web.ErrorResponse:
+    properties:
+      messages:
+        items:
+          type: string
+        type: array
+      title:
+        type: string
+    type: object
+  web.RequestAdmin:
+    properties:
+      company_client_ids:
+        example:
+        - 1
+        - 2
+        items:
+          type: integer
+        type: array
+      email:
+        example: example@bumame.com
+        type: string
+      name:
+        example: example@bumame.com
+        type: string
+      password:
+        example: asdf1234
+        type: string
+      position:
+        example: Manager
+        type: string
+      role:
+        example: b2b-sales
+        type: string
+    type: object
+  web.RequestAppointmentManpower:
+    properties:
+      admin_id:
+        example: 1
+        type: integer
+      role:
+        enum:
+        - admin
+        - ttv
+        - visus
+        - dokter
+        - plebo
+        example: admin
+        type: string
+    required:
+    - admin_id
+    - role
+    type: object
+  web.RequestAppointmentPatient:
+    properties:
+      b2b_package_slug:
+        description: B2BProductId []uint64 `json:"b2b_product_id" validate:"required"
+          example:"1,2"`
+        example:
+        - mcu-basic-proo
+        - mcu-basic-plus-plus
+        items:
+          type: string
+        type: array
+      barcode:
+        example: "1234567890123456"
+        type: string
+      birth_date:
+        example: "2021-01-01"
+        type: string
+      email:
+        example: patient@example.com
+        type: string
+      gender:
+        example: Laki-laki
+        type: string
+      group:
+        example: 34_HLI_OS
+        type: string
+      name:
+        example: Patient Name
+        type: string
+      nik:
+        example: "1234567890123456"
+        type: string
+      phone:
+        example: "081234567890"
+        type: string
+    required:
+    - b2b_package_slug
+    - barcode
+    - birth_date
+    - email
+    - gender
+    - name
+    - nik
+    - phone
+    type: object
+  web.RequestAppointmentPatientAnalysisAnamnesa:
+    properties:
+      kebiasaan:
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      riwayat_penyakit_keluarga:
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      riwayat_penyakit_sendiri:
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+    required:
+    - kebiasaan
+    - riwayat_penyakit_keluarga
+    - riwayat_penyakit_sendiri
+    type: object
+  web.RequestAppointmentPatientCheckIn:
+    properties:
+      notes_thorax:
+        example: Aman
+        type: string
+      notes_urine:
+        example: Aman
+        type: string
+      status_puasa:
+        example: Puasa
+        type: string
+      thorax_refuse_reason:
+        example: Karena sudah berjabat tangan
+        type: string
+      urine_refuse_reason:
+        example: Karena sudah kencing
+        type: string
+    type: object
+  web.RequestAppointmentPatientCheckOut:
+    properties:
+      photo_proof_url:
+        example: https://example.com/photo_proof.jpg
+        type: string
+    type: object
+  web.RequestAppointmentPatientExaminationChecklist:
+    properties:
+      admin_id:
+        description: |-
+          Spirometri just checklist aja
+          Treadmill just checklist aja
+          USG Abdomen just checklist aja
+          USG Mammae just checklist aja
+        example: 1
+        type: integer
+      audiometri:
+        description: |-
+          Rontgen just checklist aja
+          EKG just checklist aja
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      injection:
+        description: examination information
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      pap_smear:
+        description: examination information
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      phlebotomy:
+        description: examination information
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      physical_test:
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      specimen_mandiri:
+        description: examination information
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      status:
+        enum:
+        - pending
+        - completed
+        - skipped
+        example: pending
+        type: string
+      visus:
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      vital_signs:
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+    required:
+    - admin_id
+    - status
+    type: object
+  web.RequestAppointmentPatientExaminationChecklistAnalyzed:
+    properties:
+      admin_id:
+        example: 1
+        type: integer
+    required:
+    - admin_id
+    type: object
+  web.RequestAppointmentPatientExaminationChecklistInputted:
+    properties:
+      admin_id:
+        example: 1
+        type: integer
+    required:
+    - admin_id
+    type: object
+  web.RequestAppointmentPatientUpdateTubeNumber:
+    properties:
+      tube_number:
+        example: "1234567890"
+        type: string
+    type: object
+  web.RequestAppointmentSurveyDoc:
+    properties:
+      description:
+        example: Description
+        type: string
+      file_extension:
+        example: pdf
+        type: string
+      file_size_bytes:
+        example: 1000
+        type: integer
+      file_url:
+        example: https://example.com/file.pdf
+        type: string
+    required:
+    - description
+    - file_extension
+    - file_size_bytes
+    - file_url
+    type: object
+  web.RequestB2BEquipmentConsumable:
+    properties:
+      name:
+        example: Product Name
+        type: string
+      price:
+        example: 10000000
+        type: integer
+      quantity:
+        example: 100
+        type: integer
+      type:
+        example: equipment | consumable
+        type: string
+      unit:
+        example: pcs
+        type: string
+    required:
+    - name
+    - price
+    - quantity
+    - type
+    - unit
+    type: object
+  web.RequestB2BEquipmentConsumableChangeQuantity:
+    properties:
+      quantity:
+        example: 100
+        type: integer
+    required:
+    - quantity
+    type: object
+  web.RequestB2BPackage:
+    properties:
+      custom_examination_checklist:
+        example:
+        - injection
+        - phlebotomy
+        items:
+          type: string
+        type: array
+      id:
+        default: 0
+        example: 1
+        type: integer
+      is_use_custom_examination_checklist:
+        example: 1
+        type: integer
+      name:
+        example: Package Name
+        type: string
+      product_ids:
+        example:
+        - 1
+        - 2
+        - 3
+        items:
+          type: integer
+        type: array
+    required:
+    - name
+    - product_ids
+    type: object
+  web.RequestB2BProduct:
+    properties:
+      examination_checklist:
+        example:
+        - injection
+        - phlebotomy
+        items:
+          type: string
+        type: array
+      id:
+        default: 0
+        example: 1
+        type: integer
+      name:
+        example: Product Name
+        type: string
+      price:
+        example: 10000000
+        type: integer
+    required:
+    - name
+    - price
+    type: object
+  web.RequestB2BProductGetExaminationChecklist:
+    properties:
+      product_ids:
+        example:
+        - 1
+        - 2
+        - 3
+        items:
+          type: integer
+        type: array
+    required:
+    - product_ids
+    type: object
+  web.RequestBumameAppointment:
+    properties:
+      appointment_note:
+        example: Appointment note
+        type: string
+      company_client_id:
+        example: 1
+        type: integer
+      discount_percentage:
+        example: 5
+        type: number
+      execution_type:
+        example: In-house
+        type: string
+      number_of_patient:
+        example: 1
+        type: integer
+      project_type:
+        example: On-site
+        type: string
+      sales_admin_id:
+        example: 1
+        type: integer
+      total_amount:
+        example: 9500000
+        type: integer
+      total_discount:
+        example: 500000
+        type: integer
+      total_price_pre_discount:
+        example: 10000000
+        type: integer
+    required:
+    - company_client_id
+    - discount_percentage
+    - execution_type
+    - number_of_patient
+    - project_type
+    - sales_admin_id
+    - total_amount
+    - total_discount
+    - total_price_pre_discount
+    type: object
+  web.RequestBumameAppointmentChangeStatus:
+    properties:
+      appointment_status:
+        enum:
+        - waiting_for_approval
+        - approved
+        - in_progress
+        - post_progress
+        - completed
+        - cancelled
+        - rejected
+        - closed
+        example: waiting_for_approval
+        type: string
+      is_approved_ceo:
+        example: 1
+        type: integer
+      is_approved_head_of_ops:
+        example: 1
+        type: integer
+      is_approved_head_of_sales:
+        example: 1
+        type: integer
+    required:
+    - appointment_status
+    type: object
+  web.RequestBumameAppointmentDetailEquipmentConsumable:
+    properties:
+      b2b_equipment_consumable_id:
+        example: 1
+        type: integer
+      quantity:
+        example: 1
+        type: integer
+    required:
+    - b2b_equipment_consumable_id
+    - quantity
+    type: object
+  web.RequestBumameAppointmentDetailPackage:
+    properties:
+      discount:
+        example: 500000
+        type: integer
+      package_id:
+        example: 1
+        type: integer
+      price:
+        example: 10000000
+        type: integer
+      quantity:
+        example: 1
+        type: integer
+      total:
+        example: 9500000
+        type: integer
+    required:
+    - discount
+    - package_id
+    - price
+    - quantity
+    - total
+    type: object
+  web.RequestBumameAppointmentDetailProduct:
+    properties:
+      b2b_product_id:
+        example: 1
+        type: integer
+      discount:
+        example: 500000
+        type: integer
+      price:
+        example: 10000000
+        type: integer
+      quantity:
+        example: 1
+        type: integer
+      total:
+        example: 9500000
+        type: integer
+    required:
+    - b2b_product_id
+    - discount
+    - price
+    - quantity
+    - total
+    type: object
+  web.RequestBumameAppointmentHeldDate:
+    properties:
+      held_date_string_arr:
+        example:
+        - "2025-01-01"
+        items:
+          type: string
+        type: array
+    required:
+    - held_date_string_arr
+    type: object
+  web.RequestBumameAppointmentManpowerReady:
+    properties:
+      is_manpower_ready:
+        example: 1
+        type: integer
+    type: object
+  web.RequestCompanyClient:
+    properties:
+      address:
+        example: Jl. Jendral Sudirman Kav. 52-53, RT.5/RW.3, Senayan, Kebayoran Baru,
+          Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12190
+        type: string
+      contact_person_email:
+        example: contact@astra.com
+        type: string
+      contact_person_name:
+        example: John Doe
+        type: string
+      contact_person_phone:
+        example: 021-567890
+        type: string
+      contact_person_position:
+        example: Manager
+        type: string
+      email:
+        example: info@astra.com
+        type: string
+      industry_type:
+        example: Automotive
+        type: string
+      name:
+        example: PT. Astra International
+        type: string
+      phone:
+        example: 021-567890
+        type: string
+    required:
+    - address
+    - email
+    - industry_type
+    - name
+    - phone
+    type: object
+  web.RequestDailySlot:
+    properties:
+      slot_quota:
+        example: 10
+        type: integer
+    required:
+    - slot_quota
+    type: object
+  web.RequestElectromedicalExamination:
+    properties:
+      admin_id:
+        example: 1
+        type: integer
+      electromedical_examination_json:
+        example: '{rontgen: {status: ''normal'', description: ''Normal''}, ekg: {status:
+          ''normal'', description: ''Normal''}}'
+        type: string
+    type: object
+  web.RequestOverallExamination:
+    properties:
+      admin_id:
+        example: 1
+        type: integer
+      overall_analysis:
+        example: Fit to work
+        type: string
+      saran:
+        example: Sarankan untuk melakukan pemeriksaan lebih lanjut
+        type: string
+    type: object
+  web.ResponseStandard:
+    properties:
+      data: {}
+      errors:
+        items:
+          $ref: '#/definitions/web.ErrorResponse'
+        type: array
+      fulfilled:
+        type: integer
+      message:
+        type: string
+      pagination:
+        description: |-
+          Meta       any `json:"meta"`
+          JsonApi    any `json:"jsonapi"`
+          Links      any `json:"links"`
+          Included   any `json:"included"`
+          Self       any `json:"self"`
+          Related    any `json:"related"`
+      statusCode:
+        type: integer
+    type: object
+info:
+  contact: {}
+paths:
+  /appointment:
+    get:
+      consumes:
+      - application/json
+      description: Get all appointment
+      parameters:
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      - description: Status
+        enum:
+        - lead
+        - fixed_lead
+        - waiting_for_approval
+        - approved
+        - processed_by_ops
+        - in_progress
+        - post_progress
+        - completed
+        - cancelled
+        - rejected
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get all appointment
+      tags:
+      - appointment
+    post:
+      consumes:
+      - application/json
+      description: Create appointment
+      parameters:
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestBumameAppointment'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Create appointment
+      tags:
+      - appointment
+  /appointment-manpower/{appointment_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get all appointment manpower by appointment id
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get all appointment manpower by appointment id
+      tags:
+      - appointment-manpower
+    post:
+      consumes:
+      - application/json
+      description: Create appointment manpower
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentManpower'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Create appointment manpower
+      tags:
+      - appointment-manpower
+  /appointment-manpower/{appointment_id}/{appointment_manpower_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete appointment manpower
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Manpower ID
+        in: path
+        name: appointment_manpower_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Delete appointment manpower
+      tags:
+      - appointment-manpower
+  /appointment-manpower/{appointment_id}/available-manpower:
+    get:
+      consumes:
+      - application/json
+      description: Find available manpower
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Find available manpower
+      tags:
+      - appointment-manpower
+  /appointment-patient-analysis/{appointment_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get all appointment patient analysis by appointment id
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get all appointment patient analysis by appointment id
+      tags:
+      - appointment-patient-analysis
+  /appointment-patient-analysis/{appointment_id}/{appointment_patient_id}/analyze-electromedical-examination:
+    put:
+      consumes:
+      - application/json
+      description: Analyze electromedical examination
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      - description: Electromedical Examination
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestElectromedicalExamination'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Analyze electromedical examination
+      tags:
+      - appointment-patient-analysis
+  /appointment-patient-analysis/{appointment_id}/{appointment_patient_id}/analyze-overall-examination:
+    put:
+      consumes:
+      - application/json
+      description: Analyze overall examination
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      - description: Overall Examination
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestOverallExamination'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Analyze overall examination
+      tags:
+      - appointment-patient-analysis
+  /appointment-patient-barcode/{appointment_id}/{barcode}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete appointment patient by barcode
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Patient Barcode
+        in: path
+        name: barcode
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Delete appointment patient by barcode
+      tags:
+      - appointment-patient-barcode
+    get:
+      consumes:
+      - application/json
+      description: Get appointment patient by appointment id and barcode
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Patient Barcode
+        in: path
+        name: barcode
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get appointment patient by appointment id and barcode
+      tags:
+      - appointment-patient-barcode
+    put:
+      consumes:
+      - application/json
+      description: Update appointment patient by barcode
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Patient Barcode
+        in: path
+        name: barcode
+        required: true
+        type: string
+      - description: Request Appointment Patient
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatient'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update appointment patient by barcode
+      tags:
+      - appointment-patient-barcode
+  /appointment-patient-barcode/{appointment_id}/{barcode}/analysis-anamnesa:
+    put:
+      consumes:
+      - application/json
+      description: Update appointment patient analysis anamnesa by barcode
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Patient Barcode
+        in: path
+        name: barcode
+        required: true
+        type: string
+      - description: Request Appointment Patient Analysis Anamnesa
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatientAnalysisAnamnesa'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update appointment patient analysis anamnesa by barcode
+      tags:
+      - appointment-patient-barcode
+  /appointment-patient-barcode/{appointment_id}/{barcode}/check-in:
+    put:
+      consumes:
+      - application/json
+      description: Check in examination by barcode
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Patient Barcode
+        in: path
+        name: barcode
+        required: true
+        type: string
+      - description: Request Appointment Patient Check In
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatientCheckIn'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Check in examination by barcode
+      tags:
+      - appointment-patient-barcode
+  /appointment-patient-barcode/{appointment_id}/{barcode}/check-out:
+    put:
+      consumes:
+      - application/json
+      description: Check out examination by barcode
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Patient Barcode
+        in: path
+        name: barcode
+        required: true
+        type: string
+      - description: Request Appointment Patient Check Out
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatientCheckOut'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Check out examination by barcode
+      tags:
+      - appointment-patient-barcode
+  /appointment-patient-barcode/{appointment_id}/{barcode}/tube-number:
+    put:
+      consumes:
+      - application/json
+      description: Update appointment patient tube number by barcode
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Patient Barcode
+        in: path
+        name: barcode
+        required: true
+        type: string
+      - description: Request Appointment Patient Update Tube Number
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatientUpdateTubeNumber'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update appointment patient tube number by barcode
+      tags:
+      - appointment-patient-barcode
+  ? /appointment-patient-examination-checklist-barcode/{appointment_id}/{barcode}/examination-checklist/{examination_checklist_value}
+  : get:
+      consumes:
+      - application/json
+      description: Get one appointment patient examination checklist by barcode
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Patient Barcode
+        in: path
+        name: barcode
+        required: true
+        type: string
+      - description: Examination Checklist Value
+        enum:
+        - vital-signs
+        - visus
+        - physical-test
+        - injection
+        - phlebotomy
+        - specimen-mandiri
+        - pap-smear
+        - rontgen
+        - ekg
+        - audiometri
+        - spirometri
+        - treadmill
+        - usg-abdomen
+        - usg-mammae
+        in: path
+        name: examination_checklist_value
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get one appointment patient examination checklist by barcode
+      tags:
+      - appointment-patient-examination-checklist-barcode
+    put:
+      consumes:
+      - application/json
+      description: Set status of appointment patient examination checklist by barcode
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Patient Barcode
+        in: path
+        name: barcode
+        required: true
+        type: string
+      - description: Examination Checklist Value
+        enum:
+        - vital-signs
+        - visus
+        - physical-test
+        - injection
+        - phlebotomy
+        - specimen-mandiri
+        - pap-smear
+        - rontgen
+        - ekg
+        - audiometri
+        - spirometri
+        - treadmill
+        - usg-abdomen
+        - usg-mammae
+        in: path
+        name: examination_checklist_value
+        required: true
+        type: string
+      - description: Status
+        in: body
+        name: status
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatientExaminationChecklist'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Set status of appointment patient examination checklist by barcode
+      tags:
+      - appointment-patient-examination-checklist-barcode
+  ? /appointment-patient-examination-checklist-barcode/{appointment_id}/{barcode}/examination-checklist/{examination_checklist_value}/analyzed
+  : put:
+      consumes:
+      - application/json
+      description: Set status of appointment patient examination checklist as analyzed
+        by barcode
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Patient Barcode
+        in: path
+        name: barcode
+        required: true
+        type: string
+      - description: Examination Checklist Value
+        enum:
+        - rontgen
+        - ekg
+        - audiometri
+        - spirometri
+        - treadmill
+        - usg-abdomen
+        - usg-mammae
+        in: path
+        name: examination_checklist_value
+        required: true
+        type: string
+      - description: Admin ID
+        in: body
+        name: admin_id
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatientExaminationChecklistAnalyzed'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Set status of appointment patient examination checklist as analyzed
+        by barcode
+      tags:
+      - appointment-patient-examination-checklist-barcode
+  ? /appointment-patient-examination-checklist-barcode/{appointment_id}/{barcode}/examination-checklist/{examination_checklist_value}/inputted
+  : put:
+      consumes:
+      - application/json
+      description: Set status of appointment patient examination checklist as inputted
+        by barcode
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Patient Barcode
+        in: path
+        name: barcode
+        required: true
+        type: string
+      - description: Examination Checklist Value
+        enum:
+        - phlebotomy
+        - specimen-mandiri
+        - pap-smear
+        - rontgen
+        - ekg
+        - audiometri
+        - spirometri
+        - treadmill
+        - usg-abdomen
+        - usg-mammae
+        in: path
+        name: examination_checklist_value
+        required: true
+        type: string
+      - description: Admin ID
+        in: body
+        name: admin_id
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatientExaminationChecklistInputted'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Set status of appointment patient examination checklist as inputted
+        by barcode
+      tags:
+      - appointment-patient-examination-checklist-barcode
+  ? /appointment-patient-examination-checklist/{appointment_id}/{appointment_patient_id}/examination-checklist/{examination_checklist_value}
+  : get:
+      consumes:
+      - application/json
+      description: Get one appointment patient examination checklist by appointment
+        id
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      - description: Examination Checklist Value
+        enum:
+        - vital-signs
+        - visus
+        - physical-test
+        - injection
+        - phlebotomy
+        - specimen-mandiri
+        - pap-smear
+        - rontgen
+        - ekg
+        - audiometri
+        - spirometri
+        - treadmill
+        - usg-abdomen
+        - usg-mammae
+        in: path
+        name: examination_checklist_value
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get one appointment patient examination checklist by appointment id
+      tags:
+      - appointment-patient-examination-checklist
+    put:
+      consumes:
+      - application/json
+      description: Set status of appointment patient examination checklist
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      - description: Examination Checklist Value
+        enum:
+        - vital-signs
+        - visus
+        - physical-test
+        - injection
+        - phlebotomy
+        - specimen-mandiri
+        - pap-smear
+        - rontgen
+        - ekg
+        - audiometri
+        - spirometri
+        - treadmill
+        - usg-abdomen
+        - usg-mammae
+        in: path
+        name: examination_checklist_value
+        required: true
+        type: string
+      - description: Status
+        in: body
+        name: status
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatientExaminationChecklist'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Set status of appointment patient examination checklist
+      tags:
+      - appointment-patient-examination-checklist
+  ? /appointment-patient-examination-checklist/{appointment_id}/{appointment_patient_id}/examination-checklist/{examination_checklist_value}/analyzed
+  : put:
+      consumes:
+      - application/json
+      description: Set status of appointment patient examination checklist as analyzed
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      - description: Examination Checklist Value
+        enum:
+        - rontgen
+        - ekg
+        - audiometri
+        - spirometri
+        - treadmill
+        - usg-abdomen
+        - usg-mammae
+        in: path
+        name: examination_checklist_value
+        required: true
+        type: string
+      - description: Admin ID
+        in: body
+        name: admin_id
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatientExaminationChecklistAnalyzed'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Set status of appointment patient examination checklist as analyzed
+      tags:
+      - appointment-patient-examination-checklist
+  ? /appointment-patient-examination-checklist/{appointment_id}/{appointment_patient_id}/examination-checklist/{examination_checklist_value}/inputted
+  : put:
+      consumes:
+      - application/json
+      description: Set status of appointment patient examination checklist as inputted
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      - description: Examination Checklist Value
+        enum:
+        - phlebotomy
+        - specimen-mandiri
+        - pap-smear
+        - rontgen
+        - ekg
+        - audiometri
+        - spirometri
+        - treadmill
+        - usg-abdomen
+        - usg-mammae
+        in: path
+        name: examination_checklist_value
+        required: true
+        type: string
+      - description: Admin ID
+        in: body
+        name: admin_id
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatientExaminationChecklistInputted'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Set status of appointment patient examination checklist as inputted
+      tags:
+      - appointment-patient-examination-checklist
+  /appointment-patient-examination-checklist/{appointment_id}/examination-checklist/{examination_checklist_value}:
+    get:
+      consumes:
+      - application/json
+      description: Get all appointment patient examination checklist by appointment
+        id
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      - description: Examination Checklist Value
+        enum:
+        - vital-signs
+        - visus
+        - physical-test
+        - injection
+        - phlebotomy
+        - specimen-mandiri
+        - pap-smear
+        - rontgen
+        - ekg
+        - audiometri
+        - spirometri
+        - treadmill
+        - usg-abdomen
+        - usg-mammae
+        in: path
+        name: examination_checklist_value
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get all appointment patient examination checklist by appointment id
+      tags:
+      - appointment-patient-examination-checklist
+  /appointment-patient/{appointment_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get all appointment patient by appointment id
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get all appointment patient by appointment id
+      tags:
+      - appointment-patient
+    post:
+      consumes:
+      - application/json
+      description: Create appointment patient
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Request Appointment Patient
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatient'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Create appointment patient
+      tags:
+      - appointment-patient
+  /appointment-patient/{appointment_id}/{appointment_patient_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete appointment patient
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Delete appointment patient
+      tags:
+      - appointment-patient
+    get:
+      consumes:
+      - application/json
+      description: Get appointment patient by appointment id and appointment patient
+        id
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get appointment patient by appointment id and appointment patient id
+      tags:
+      - appointment-patient
+    put:
+      consumes:
+      - application/json
+      description: Update appointment patient
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      - description: Request Appointment Patient
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatient'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update appointment patient
+      tags:
+      - appointment-patient
+  /appointment-patient/{appointment_id}/{appointment_patient_id}/analysis-anamnesa:
+    put:
+      consumes:
+      - application/json
+      description: Update appointment patient analysis anamnesa
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      - description: Request Appointment Patient Analysis Anamnesa
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatientAnalysisAnamnesa'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update appointment patient analysis anamnesa
+      tags:
+      - appointment-patient
+  /appointment-patient/{appointment_id}/{appointment_patient_id}/check-in-at:
+    put:
+      consumes:
+      - application/json
+      description: Update check in at
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update check in at
+      tags:
+      - appointment-patient
+  /appointment-patient/{appointment_id}/{appointment_patient_id}/check-in-examination:
+    put:
+      consumes:
+      - application/json
+      description: Check in examination
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      - description: Request Appointment Patient Check In
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatientCheckIn'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Check in examination
+      tags:
+      - appointment-patient
+  /appointment-patient/{appointment_id}/{appointment_patient_id}/check-out-at:
+    put:
+      consumes:
+      - application/json
+      description: Update check out at
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update check out at
+      tags:
+      - appointment-patient
+  /appointment-patient/{appointment_id}/{appointment_patient_id}/check-out-examination:
+    put:
+      consumes:
+      - application/json
+      description: Check out examination
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      - description: Request Appointment Patient Check Out
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatientCheckOut'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Check out examination
+      tags:
+      - appointment-patient
+  /appointment-patient/{appointment_id}/{appointment_patient_id}/tube-number:
+    put:
+      consumes:
+      - application/json
+      description: Update appointment patient tube number
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Patient ID
+        in: path
+        name: appointment_patient_id
+        required: true
+        type: string
+      - description: Request Appointment Patient Update Tube Number
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentPatientUpdateTubeNumber'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update appointment patient tube number
+      tags:
+      - appointment-patient
+  /appointment-patient/{appointment_id}/bulk-input:
+    post:
+      consumes:
+      - application/json
+      description: Bulk input appointment patient
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: CSV File
+        in: formData
+        name: csv_file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Bulk input appointment patient
+      tags:
+      - appointment-patient
+  /appointment-patient/{appointment_id}/bulk-input-by-product-slug:
+    post:
+      consumes:
+      - application/json
+      description: Bulk input appointment patient by product slug
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: CSV File
+        in: formData
+        name: csv_file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Bulk input appointment patient by product slug
+      tags:
+      - appointment-patient
+  /appointment-survey-doc/{appointment_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get all appointment survey doc by appointment id
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get all appointment survey doc by appointment id
+      tags:
+      - appointment-survey-doc
+    post:
+      consumes:
+      - application/json
+      description: Create appointment survey doc
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Request Appointment Survey Doc
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAppointmentSurveyDoc'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Create appointment survey doc
+      tags:
+      - appointment-survey-doc
+  /appointment-survey-doc/{appointment_id}/{appointment_survey_doc_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete appointment survey doc
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Appointment Survey Doc ID
+        in: path
+        name: appointment_survey_doc_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Delete appointment survey doc
+      tags:
+      - appointment-survey-doc
+  /appointment/{appointment_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete appointment
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Delete appointment
+      tags:
+      - appointment
+    get:
+      consumes:
+      - application/json
+      description: Get appointment by id
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get appointment by id
+      tags:
+      - appointment
+    put:
+      consumes:
+      - application/json
+      description: Update appointment
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestBumameAppointment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update appointment
+      tags:
+      - appointment
+  /appointment/{appointment_id}/detail-package:
+    put:
+      consumes:
+      - application/json
+      description: Update appointment detail package
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/web.RequestBumameAppointmentDetailPackage'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update appointment detail package
+      tags:
+      - appointment
+  /appointment/{appointment_id}/detail-product:
+    put:
+      consumes:
+      - application/json
+      description: Update appointment detail product
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/web.RequestBumameAppointmentDetailProduct'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update appointment detail product
+      tags:
+      - appointment
+  /appointment/{appointment_id}/equipment-consumable:
+    get:
+      consumes:
+      - application/json
+      description: Get all appointment detail equipment consumable by appointment
+        id
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get all appointment detail equipment consumable by appointment id
+      tags:
+      - appointment-detail-equipment-consumable
+    put:
+      consumes:
+      - application/json
+      description: Update appointment detail equipment consumable
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Request Appointment Detail Equipment Consumable
+        in: body
+        name: request
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/web.RequestBumameAppointmentDetailEquipmentConsumable'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update appointment detail equipment consumable
+      tags:
+      - appointment-detail-equipment-consumable
+  /appointment/{appointment_id}/held-date:
+    put:
+      consumes:
+      - application/json
+      description: Update appointment held date
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestBumameAppointmentHeldDate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update appointment held date
+      tags:
+      - appointment
+  /appointment/{appointment_id}/manpower-ready:
+    put:
+      consumes:
+      - application/json
+      description: Update appointment manpower ready
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestBumameAppointmentManpowerReady'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update appointment manpower ready
+      tags:
+      - appointment
+  /appointment/{appointment_id}/status:
+    put:
+      consumes:
+      - application/json
+      description: Update appointment status
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestBumameAppointmentChangeStatus'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update appointment status
+      tags:
+      - appointment
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Login
+      parameters:
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/controller.RequestLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Login
+      tags:
+      - auth
+  /auth/read-token:
+    get:
+      consumes:
+      - application/json
+      description: Read Token
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Read Token
+      tags:
+      - auth
+  /b2b-admin:
+    get:
+      consumes:
+      - application/json
+      description: Get all b2b admins
+      parameters:
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      - in: query
+        name: role
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get all b2b admins
+      tags:
+      - b2b-admin
+    post:
+      consumes:
+      - application/json
+      description: Create b2b admin
+      parameters:
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAdmin'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Create b2b admin
+      tags:
+      - b2b-admin
+  /b2b-admin/{b2b_admin_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete b2b admin
+      parameters:
+      - description: B2B Admin ID
+        in: path
+        name: b2b_admin_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Delete b2b admin
+      tags:
+      - b2b-admin
+    get:
+      consumes:
+      - application/json
+      description: Get b2b admin by ID
+      parameters:
+      - description: B2B Admin ID
+        in: path
+        name: b2b_admin_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get b2b admin by ID
+      tags:
+      - b2b-admin
+    put:
+      consumes:
+      - application/json
+      description: Update b2b admin
+      parameters:
+      - description: B2B Admin ID
+        in: path
+        name: b2b_admin_id
+        required: true
+        type: string
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestAdmin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update b2b admin
+      tags:
+      - b2b-admin
+  /b2b-equipment-consumable:
+    get:
+      consumes:
+      - application/json
+      description: Get all b2b equipment consumables
+      parameters:
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get all b2b equipment consumables
+      tags:
+      - b2b-equipment-consumable
+    post:
+      consumes:
+      - application/json
+      description: Create b2b equipment consumable
+      parameters:
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestB2BEquipmentConsumable'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Create b2b equipment consumable
+      tags:
+      - b2b-equipment-consumable
+  /b2b-equipment-consumable/{b2b_equipment_consumable_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete b2b equipment consumable
+      parameters:
+      - description: B2B Equipment Consumable ID
+        in: path
+        name: b2b_equipment_consumable_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Delete b2b equipment consumable
+      tags:
+      - b2b-equipment-consumable
+    get:
+      consumes:
+      - application/json
+      description: Get b2b equipment consumable by ID
+      parameters:
+      - description: B2B Equipment Consumable ID
+        in: path
+        name: b2b_equipment_consumable_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get b2b equipment consumable by ID
+      tags:
+      - b2b-equipment-consumable
+    put:
+      consumes:
+      - application/json
+      description: Update b2b equipment consumable
+      parameters:
+      - description: B2B Equipment Consumable ID
+        in: path
+        name: b2b_equipment_consumable_id
+        required: true
+        type: string
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestB2BEquipmentConsumable'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update b2b equipment consumable
+      tags:
+      - b2b-equipment-consumable
+  /b2b-equipment-consumable/{b2b_equipment_consumable_id}/change-quantity:
+    put:
+      consumes:
+      - application/json
+      description: Change quantity b2b equipment consumable
+      parameters:
+      - description: B2B Equipment Consumable ID
+        in: path
+        name: b2b_equipment_consumable_id
+        required: true
+        type: string
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestB2BEquipmentConsumableChangeQuantity'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Change quantity b2b equipment consumable
+      tags:
+      - b2b-equipment-consumable
+  /b2b-package:
+    get:
+      consumes:
+      - application/json
+      description: Get all b2b packages
+      parameters:
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      - in: query
+        name: role
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get all b2b packages
+      tags:
+      - b2b-package
+    post:
+      consumes:
+      - application/json
+      description: Create b2b package
+      parameters:
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestB2BPackage'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Create b2b package
+      tags:
+      - b2b-package
+  /b2b-package/{b2b_package_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete b2b package
+      parameters:
+      - description: B2B Package ID
+        in: path
+        name: b2b_package_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Delete b2b package
+      tags:
+      - b2b-package
+    get:
+      consumes:
+      - application/json
+      description: Get b2b package by ID
+      parameters:
+      - description: B2B Package ID
+        in: path
+        name: b2b_package_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get b2b package by ID
+      tags:
+      - b2b-package
+    put:
+      consumes:
+      - application/json
+      description: Update b2b package
+      parameters:
+      - description: B2B Package ID
+        in: path
+        name: b2b_package_id
+        required: true
+        type: string
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestB2BPackage'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update b2b package
+      tags:
+      - b2b-package
+  /b2b-package/{b2b_package_id}/duplicate:
+    post:
+      consumes:
+      - application/json
+      description: Duplicate b2b package by package ID
+      parameters:
+      - description: B2B Package ID
+        in: path
+        name: b2b_package_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Duplicate b2b package by package ID
+      tags:
+      - b2b-package
+  /b2b-product:
+    get:
+      consumes:
+      - application/json
+      description: Get all b2b products
+      parameters:
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      - in: query
+        name: role
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get all b2b products
+      tags:
+      - b2b-product
+    post:
+      consumes:
+      - application/json
+      description: Create b2b product
+      parameters:
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestB2BProduct'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Create b2b product
+      tags:
+      - b2b-product
+  /b2b-product/{b2b_product_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete b2b product
+      parameters:
+      - description: B2B Product ID
+        in: path
+        name: b2b_product_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Delete b2b product
+      tags:
+      - b2b-product
+    get:
+      consumes:
+      - application/json
+      description: Get b2b product by ID
+      parameters:
+      - description: B2B Product ID
+        in: path
+        name: b2b_product_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get b2b product by ID
+      tags:
+      - b2b-product
+    put:
+      consumes:
+      - application/json
+      description: Update b2b product
+      parameters:
+      - description: B2B Product ID
+        in: path
+        name: b2b_product_id
+        required: true
+        type: string
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestB2BProduct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update b2b product
+      tags:
+      - b2b-product
+  /b2b-product/bulk-update:
+    put:
+      consumes:
+      - multipart/form-data
+      description: Bulk update b2b products
+      parameters:
+      - description: "CSV File Structure:\n Header: id,name,price,vital-signs,visus,physical-test,injection,phlebotomy,specimen-mandiri,pap-smear,rontgen,ekg,audiometri,spirometri,treadmill,usg-abdomen,usg-mammae;\n
+          Example Value: 1,MCU Basic,10000,1,1,1,1,1,1,1,1,1,1,1,1,1,1 \n Note: if
+          you want to create new product, you can leave the id as empty, else if you
+          want to update the product, you can fill the id with the product id"
+        in: formData
+        name: csv_file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Bulk update b2b products
+      tags:
+      - b2b-product
+  /b2b-product/generate-slugs:
+    post:
+      consumes:
+      - application/json
+      description: Generate slugs for products where slug is null
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Generate slugs for products
+      tags:
+      - b2b-product
+  /b2b-product/get-examination-checklist:
+    post:
+      consumes:
+      - application/json
+      description: Get examination checklist for products
+      parameters:
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestB2BProductGetExaminationChecklist'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get examination checklist for products
+      tags:
+      - b2b-product
+  /company-client:
+    get:
+      consumes:
+      - application/json
+      description: Get all company clients
+      parameters:
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get all company clients
+      tags:
+      - company-client
+    post:
+      consumes:
+      - application/json
+      description: Create company client
+      parameters:
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestCompanyClient'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Create company client
+      tags:
+      - company-client
+  /company-client/{company_client_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete company client
+      parameters:
+      - description: Company Client ID
+        in: path
+        name: company_client_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Delete company client
+      tags:
+      - company-client
+    get:
+      consumes:
+      - application/json
+      description: Get company client by ID
+      parameters:
+      - description: Company Client ID
+        in: path
+        name: company_client_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get company client by ID
+      tags:
+      - company-client
+    put:
+      consumes:
+      - application/json
+      description: Update company client
+      parameters:
+      - description: Company Client ID
+        in: path
+        name: company_client_id
+        required: true
+        type: string
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestCompanyClient'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update company client
+      tags:
+      - company-client
+  /daily-slot/{year}/{month}:
+    get:
+      consumes:
+      - application/json
+      description: Get daily slot by month
+      parameters:
+      - description: Month
+        in: path
+        name: month
+        required: true
+        type: string
+      - description: Year
+        in: path
+        name: year
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get daily slot by month
+      tags:
+      - daily-slot
+  /daily-slot/{year}/{month}/{day}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete daily slot
+      parameters:
+      - description: Year
+        in: path
+        name: year
+        required: true
+        type: string
+      - description: Month
+        in: path
+        name: month
+        required: true
+        type: string
+      - description: Day
+        in: path
+        name: day
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Delete daily slot
+      tags:
+      - daily-slot
+    put:
+      consumes:
+      - application/json
+      description: Update daily slot
+      parameters:
+      - description: Year
+        in: path
+        name: year
+        required: true
+        type: string
+      - description: Month
+        in: path
+        name: month
+        required: true
+        type: string
+      - description: Day
+        in: path
+        name: day
+        required: true
+        type: string
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.RequestDailySlot'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Update daily slot
+      tags:
+      - daily-slot
+  /dashboard/appointment:
+    get:
+      consumes:
+      - application/json
+      description: Get stats all appointment
+      parameters:
+      - description: Date Start (YYYY-MM-DD)
+        in: query
+        name: date_start
+        type: string
+      - description: Date End (YYYY-MM-DD)
+        in: query
+        name: date_end
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get stats all appointment
+      tags:
+      - dashboard
+  /dashboard/appointment/{appointment_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get stats per appointment
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: appointment_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ResponseStandard'
+      summary: Get stats per appointment
+      tags:
+      - dashboard
+swagger: "2.0"

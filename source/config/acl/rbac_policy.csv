@@ -1,0 +1,31 @@
+p, Guest, /read-token, GET
+p, Manager, /training_generate/publish, (POST)
+p, Manager, /training_generate/stream/*, (GET)
+p, Manager, /training_generate/publish/progress/*, (GET)
+p, Manager, /training_generate/regenerate/training/*, (POST)
+p, Manager, /api_key_generate, (GET)|(POST)
+p, Manager, /api_key_generate/*, (GET)|(POST)|(DELETE)
+p, Manager, /billing, (GET)
+p, Manager, /billing/*, (GET)
+p, Manager, /bucket_file, (GET)|(POST)
+
+p, Manager, /training, (GET)|(POST)
+p, Manager, /training/*, (GET)|(POST)|(PUT)|(DELETE)
+p, Manager, /training_exam, (GET)|(POST)
+p, Manager, /training_exam/*, (GET)|(POST)|(PUT)|(DELETE)
+p, Manager, /training_exam_import, (GET)|(POST)|(PUT)|(DELETE)
+p, Manager, /training_exam_import/*, (GET)|(POST)|(PUT)|(DELETE)
+p, Manager, /training/*/detail, (GET)|(POST)
+p, Manager, /training/*/detail/*, (GET)|(POST)|(PUT)|(DELETE)
+p, Manager, /users, (GET)|(POST)
+p, Manager, /users/*, (GET)|(POST)|(PUT)|(DELETE)
+
+p, Manager, /job_vacancy, (GET)|(POST)
+p, Manager, /job_vacancy_import, (GET)|(POST)
+
+p, Manager, /talent, (GET)|(POST)
+p, Manager, /talent/*, (GET)|(POST)|(PUT)|(DELETE)
+
+g, Manager, Guest,
+g, Superuser, Manager,
+g, Superuser, Guest,

@@ -1,0 +1,8 @@
+academy
+creator
+platform
+admin
+manager
+cpanel
+dashboard
+service-trans-mejakita

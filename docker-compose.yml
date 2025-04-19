@@ -1,0 +1,33 @@
+version: "3.5"
+
+services:
+    web-api:
+        # Build First
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ./files/logs/:/files/logs/
+            - ./uploads/:/uploads/
+        ports:
+            # Add 127.0.0.1 so the service doesnt expose to external
+            - 127.0.0.1:${APP_PORT}:${APP_PORT}
+        restart: unless-stopped
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        environment:
+            - APP_PORT=${APP_PORT}
+            # - REDIS_HOST=redis
+            - UPLOAD_DIRECTORY=uploads
+        # Limit default logging container
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "200k"
+                max-file: "10"
+                mode: non-blocking
+
+networks:
+    default:
+        name: main-network
+        external: true
